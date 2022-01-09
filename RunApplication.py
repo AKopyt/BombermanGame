@@ -1,4 +1,6 @@
 import pygame
+from Player import Player
+from Board  import Board
 import sys
 
 
@@ -24,7 +26,8 @@ class Window:
                 sys.exit()
 
 
-NaszeOkno = Window()
-NaszeOkno.run_game()
-
+#NaszeOkno = Window()
+#NaszeOkno.run_game()
+plansza = Board()
+gracz = Player(plansza)
 
