@@ -1,6 +1,6 @@
 import pygame
 from Player import Player
-from Board  import Board
+from Board import Board
 import sys
 
 
@@ -8,8 +8,14 @@ import sys
 class Window:
     def __init__(self):
         pygame.init()
-        self.screen_resolution = pygame.display.set_mode((500,500))
+        self.width =500
+        self.height =500
+        self.screen_resolution = pygame.display.set_mode((self.width,self.height))
+        self.board= Board()
+        self.player = Player(self.screen_resolution,self.width,self.height)
         pygame.display.set_caption("Bomberman")
+
+
 
     def run_game(self):
         while True:
@@ -17,6 +23,8 @@ class Window:
             self.update_screen()
 
     def update_screen(self):
+        pygame.display.flip()
+        self.player.blitme()
         pygame.display.flip()
 
 
@@ -26,8 +34,7 @@ class Window:
                 sys.exit()
 
 
-#NaszeOkno = Window()
-#NaszeOkno.run_game()
-plansza = Board()
-gracz = Player(plansza)
+NaszeOkno = Window()
+NaszeOkno.run_game()
+
 
