@@ -1,40 +1,21 @@
-import pygame
+from Window import Window
 from Player import Player
-from Board import Board
-import sys
+import pygame
 
-
-
-class Window:
+class RunAplication:
     def __init__(self):
+        self.width = 500
+        self.height = 500
+        self.screen = pygame.display.set_mode((self.width, self.height))
         pygame.init()
-        self.width =500
-        self.height =500
-        self.screen_resolution = pygame.display.set_mode((self.width,self.height))
-        self.board= Board()
-        self.player = Player(self.screen_resolution,self.width,self.height)
-        pygame.display.set_caption("Bomberman")
 
+        self.player = Player(self.screen, self.width, self.height)
+        self.lista = []
+        self.lista.append(self.player)
 
+        self.NaszeOkno = Window(self.lista, self.width, self.height)
+        self.NaszeOkno.run_game()
 
-    def run_game(self):
-        while True:
-            self.check_events()
-            self.update_screen()
-
-    def update_screen(self):
-        pygame.display.flip()
-        self.player.blitme()
-        pygame.display.flip()
-
-
-    def check_events(self):
-        for event in pygame.event.get():
-            if event.type == pygame.QUIT:
-                sys.exit()
-
-
-NaszeOkno = Window()
-NaszeOkno.run_game()
+rn = RunAplication()
 
 
