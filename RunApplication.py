@@ -1,5 +1,6 @@
 from Window import Window
 from Player import Player
+from Board import Board
 import pygame
 
 class RunAplication:
@@ -10,7 +11,10 @@ class RunAplication:
         pygame.init()
 
         self.player = Player(self.screen, self.width, self.height)
+        self.board = Board(self.screen, self.width, self.height)
+
         self.lista = []
+        self.lista.append(self.board)
         self.lista.append(self.player)
 
         self.NaszeOkno = Window(self.lista, self.width, self.height)
