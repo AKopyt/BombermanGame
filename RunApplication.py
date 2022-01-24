@@ -33,23 +33,32 @@ class RunAplication:
             if event.type == pygame.QUIT:
                 sys.exit()
             elif event.type == pygame.KEYDOWN:
-                if event.key == pygame.K_RIGHT:
-                    self.player.moving_right = True
-                if event.key == pygame.K_LEFT:
-                    self.player.moving_left = True
-                if event.key == pygame.K_UP:
-                    self.player.moving_up = True
-                if event.key == pygame.K_DOWN:
-                    self.player.moving_down = True
+                self.check_keydown_events(event)
             elif event.type == pygame.KEYUP:
-                if event.key == pygame.K_RIGHT:
-                    self.player.moving_right = False
-                if event.key == pygame.K_LEFT:
-                    self.player.moving_left = False
-                if event.key == pygame.K_UP:
-                    self.player.moving_up = False
-                if event.key == pygame.K_DOWN:
-                    self.player.moving_down = False
+                self.check_keyup_events(event)
+
+    def check_keydown_events(self, event):
+        if event.key == pygame.K_RIGHT:
+            self.player.moving_right = True
+        if event.key == pygame.K_LEFT:
+            self.player.moving_left = True
+        if event.key == pygame.K_UP:
+            self.player.moving_up = True
+        if event.key == pygame.K_DOWN:
+            self.player.moving_down = True
+        if event.key == pygame.K_q:
+            sys.exit()
+
+    def check_keyup_events(self, event):
+        if event.key == pygame.K_RIGHT:
+            self.player.moving_right = False
+        if event.key == pygame.K_LEFT:
+            self.player.moving_left = False
+        if event.key == pygame.K_UP:
+            self.player.moving_up = False
+        if event.key == pygame.K_DOWN:
+            self.player.moving_down = False
+
 
 rn = RunAplication()
 rn.run_game()
