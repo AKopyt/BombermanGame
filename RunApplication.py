@@ -4,23 +4,23 @@ from Board import Board
 from Settings import Settings
 import sys
 import pygame
+from DrawAbstract import DrawAbstract
+from Bomb import Bomb
 
 class RunAplication:
-    def __init__(self):
-        self.width = 500
-        self.height = 500
-        self.screen = pygame.display.set_mode((self.width, self.height))
+    def __init__(self, settings, gracz: DrawAbstract, board: DrawAbstract):
+
         pygame.init()
 
-        self.settings = Settings()
-        self.player = Player(self.screen, self.width, self.height,self.settings)
-        self.board = Board(self.screen, self.width, self.height)
+        self.settings = settings
+        self.player = gracz
+        self.board = board
 
         self.lista = []
         self.lista.append(self.board)
         self.lista.append(self.player)
 
-        self.NaszeOkno = Window(self.lista, self.width, self.height)
+        self.NaszeOkno = Window(self.lista, self.settings.width, self.settings.height)
 
     def run_game(self):
         while True:
@@ -46,8 +46,14 @@ class RunAplication:
             self.player.moving_up = True
         if event.key == pygame.K_DOWN:
             self.player.moving_down = True
+        if event.key == pygame.K_b:
+            self.drop_bomb()
         if event.key == pygame.K_q:
             sys.exit()
+
+    def drop_bomb(self):
+        bomb = Bomb(self.settings,self.player.x, self.player.y)
+        self.lista.append(bomb)
 
     def check_keyup_events(self, event):
         if event.key == pygame.K_RIGHT:
@@ -59,8 +65,22 @@ class RunAplication:
         if event.key == pygame.K_DOWN:
             self.player.moving_down = False
 
+class Config:
+    def __init__(self):
+        self.settings = Settings()
+        self.player = Player(self.settings.screen, self.settings.width, self.settings.height, self.settings)
+        self.board = Board(self.settings)
 
-rn = RunAplication()
-rn.run_game()
+
+
+        self.app = RunAplication(self.settings,self.player,self.board)
+
+    def  run(self):
+        self.app.run_game()
+
+
+
+config= Config()
+config.run()
 
 

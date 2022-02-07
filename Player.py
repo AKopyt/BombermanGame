@@ -1,6 +1,8 @@
 import pygame
+from DrawAbstract import DrawAbstract
 
-class  Player:
+
+class  Player(DrawAbstract):
     def __init__(self,screen, screen_width, screen_height, settings):
         self.screen_width = screen_width
         self.screen_height = screen_height
