@@ -6,6 +6,7 @@ import sys
 import pygame
 from DrawAbstract import DrawAbstract
 from Bomb import Bomb
+from Square import Square
 
 class RunAplication:
     def __init__(self, settings, gracz: DrawAbstract, board: DrawAbstract):
@@ -15,6 +16,7 @@ class RunAplication:
         self.settings = settings
         self.player = gracz
         self.board = board
+        self.two_dimensional_list = self.make_two_dimensional_array(self.settings)
 
         self.lista = []
         self.lista.append(self.board)
@@ -54,6 +56,16 @@ class RunAplication:
     def drop_bomb(self):
         bomb = Bomb(self.settings,self.player.x, self.player.y)
         self.lista.append(bomb)
+
+    def make_two_dimensional_array(self, settings):
+        listX=[]
+
+        for x in range(settings.amount_of_squares):
+            listY = []
+            for y in range(settings.amount_of_squares):
+                listY.append(Square(settings,x,y))
+            listX.append(listY)
+        return listX
 
     def check_keyup_events(self, event):
         if event.key == pygame.K_RIGHT:
