@@ -36,3 +36,11 @@ class  Player(DrawAbstract):
     def blitme(self):
         self.screen.blit(self.image, self.rect)
 
+    def send_x_coord(self):
+        return self.rect.x+(self.rect.width/2)
+
+    def send_y_coord(self):
+        return self.rect.y +(self.rect.height/2)
+
+
+

@@ -9,4 +9,4 @@ class Settings:
         self.board_width = self.width
         self.board_height = self.height
         self.Bomb_image = pygame.image.load("images/bomb1.png")
-        self.amount_of_squares = 20
+        self.amount_of_squares = 10

@@ -17,3 +17,4 @@ class Bomb(DrawAbstract):
 
     def blitme(self):
         self.screen.blit(self.image, self.rect)
+
