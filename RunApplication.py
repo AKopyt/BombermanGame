@@ -7,6 +7,7 @@ import pygame
 from DrawAbstract import DrawAbstract
 from Bomb import Bomb
 from Square import Square
+import asyncio
 
 class RunAplication:
     def __init__(self, settings, gracz: DrawAbstract, board: DrawAbstract):
@@ -17,18 +18,20 @@ class RunAplication:
         self.player = gracz
         self.board = board
         self.two_dimensional_list = self.make_two_dimensional_array(self.settings)
+        self.board.blitme()
+        #self.lista = []
+        #self.lista.append(self.board)
 
-        self.lista = []
-        self.lista.append(self.board)
-        self.lista.append(self.player)
-
-        self.NaszeOkno = Window(self.lista,self.two_dimensional_list,self.settings.width, self.settings.height)
+        self.NaszeOkno = Window(self.two_dimensional_list,self.settings.width, self.settings.height)
 
     def run_game(self):
+
         while True:
-            self.check_events()
             self.player.update()
+            self.player.blitme()
+
             self.NaszeOkno.update_screen()
+            self.check_events()
 
     def check_events(self):
         for event in pygame.event.get():
@@ -56,6 +59,10 @@ class RunAplication:
     def drop_bomb(self):
         bomb = Bomb(self.settings,self.player.send_x_coord(), self.player.send_y_coord())
         self.try_to_put_object_inside_square(bomb,self.player.send_x_coord(),self.player.send_y_coord())
+        for sublist in self.two_dimensional_list:
+            for square in sublist:
+                if not square.check_if_square_is_empty():
+                    square.object.blitme()
 
     def make_two_dimensional_array(self, settings):
         listX=[]
@@ -93,7 +100,7 @@ class Config:
 
         self.app = RunAplication(self.settings,self.player,self.board)
 
-    def  run(self):
+    def run(self):
         self.app.run_game()
 
 config= Config()
